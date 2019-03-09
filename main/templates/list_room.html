@@ -1,12 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>teeest</title>
-</head>
-<body>
+{% extends 'template.html' %}
+
+{% block content %}
     {% for room in Rooms %}
-        {{room}}<br>
+        {{room.0}} &nbsp;
+    {% if today in room.1 %}
+        <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+    {% else %}
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+    {% endif %}<br>
     {% endfor %}
-</body>
-</html>
+
+
+{% endblock %}
