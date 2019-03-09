@@ -6,6 +6,7 @@
 </head>
 <body>
 <form method="post">
+    {% csrf_token %}
     <label>Dodaj salę:
         <input type="text" name="name">
     </label><br>

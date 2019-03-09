@@ -1,7 +1,6 @@
 from django.db import models
 
-# Create your models here.
-
+# Create your dick bigger
 
 class Room(models.Model):
     name = models.CharField(max_length=64)
