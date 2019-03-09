@@ -9,7 +9,10 @@ def test(request):
     return HttpResponse("test")
 
 class RoomList(ListView):
-    pass
+    model =  Room
+    context_object_name = "Rooms"
+    template_name = "list_room.html"
+
 
 
 
