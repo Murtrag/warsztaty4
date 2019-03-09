@@ -4,6 +4,7 @@ poleceniem:
 
 CREATE DATABASE orderer_2000;
 
+
 2. Tworzenie template:
 Proszę template tworzyć w następującym formacjie
 
@@ -20,3 +21,5 @@ Proszę template tworzyć w następującym formacjie
 3. Biblioteka awesomeicons4.8
 ikonki: https://fontawesome.com/v4.7.0/icons/
 przykład użycia: <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+
+
