@@ -38,3 +38,12 @@ def add_room(request):
         rooms.save()
         return HttpResponse("Dodano pokój")
 
+
+def delete_room(request, id):
+    if Room.objects.filter(id=id):
+        room = Room.objects.get(id=id)
+        room.delete()
+        return HttpResponse(f"Sala {room.name} została usunięta.")
+    else:
+        return HttpResponse(f"Nie ma sali o takim id.")
+
