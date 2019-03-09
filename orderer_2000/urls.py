@@ -6,5 +6,6 @@ from main import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     url('^test/', views.test),
-    url(r'^add_room/$', views.add_room)
+    url(r'^add_room/$', views.add_room),
+    url(r'^delete_room/(?P<id>\d+)$', views.delete_room)
 ]
