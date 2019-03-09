@@ -16,8 +16,18 @@ def add_room(request):
         rooms = Room()
         rooms.name = request.POST['name']
         rooms.capacity = request.POST['capacity']
-        rooms.tv = request.POST['tv']
-        rooms.air_conditioning = request.POST['air_conditioning']
+        if request.POST['projector'] == "Tak":
+            rooms.projector = True
+        if request.POST['projector'] == "Nie":
+            rooms.projector = False
+        if request.POST['tv'] == "Tak":
+            rooms.tv = True
+        if request.POST['tv'] == "Nie":
+            rooms.tv = False
+        if request.POST['air_conditioning'] == "Tak":
+            rooms.air_conditioning = True
+        if request.POST['air_conditioning'] == "Nie":
+            rooms.air_conditioning = False
         rooms.save()
         return HttpResponse("Dodano pokój")
 
