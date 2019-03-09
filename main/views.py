@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from main.models import *
+from django.views.generic import ListView
 from django.http import HttpResponse
 
 
 def test(request):
     return HttpResponse("test")
-# Create your views here.
+
+class RoomList(ListView):
+    pass
+
 
 
 def add_room(request):
