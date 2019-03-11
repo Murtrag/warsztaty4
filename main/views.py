@@ -14,8 +14,6 @@ class RoomList(ListView):
     template_name = "list_room.html"
 
 
-
-
 def add_room(request):
     if request.method == "GET":
         return render(request, "add_room.html")
