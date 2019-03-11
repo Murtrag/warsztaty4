@@ -1,17 +1,30 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from main.models import *
-from django.views.generic import ListView
+from main.models import Room, Reservation
+from django.views import View
 from django.http import HttpResponse
-
-
+from datetime import datetime
 def test(request):
     return HttpResponse("test")
 
-class RoomList(ListView):
-    model =  Room
-    context_object_name = "Rooms"
-    template_name = "list_room.html"
+class RoomList(View):
+    '''7. Pokazanie wszystkich sal ( adres /).'''
+    def get(self, request):
+        context = {
+            "Rooms": [[x,[y.date for y in x.reservation_set.all()]] for x in Room.objects.all()],
+            "today": datetime.today().date()
+        }
+        return render(request, "list_room.html", context)
+
+
+class DetailRoom(View):
+    '''Pokazanie danych jednej sali ( /room/{id}).'''
+    def get(self, request, pk):
+        room = Room.objects.get(pk=pk)
+        context = {
+            "room": [room, room.reservation_set.filter(date__gte=datetime.today().date()).values_list("date", flat=True)]
+        }
+        return render(request, "detail_room.html", context)
 
 
 
