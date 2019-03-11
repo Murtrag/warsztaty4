@@ -28,8 +28,8 @@ class DetailRoom(View):
 
 
 
-
 def add_room(request):
+    '''Dodawanie nowej sali ( /room/new).'''
     if request.method == "GET":
         return render(request, "add_room.html")
     if request.method == "POST":
@@ -53,6 +53,7 @@ def add_room(request):
 
 
 def delete_room(request, id):
+    '''Usuwanie sali( /room/delete/{id}).'''
     if Room.objects.filter(id=id):
         room = Room.objects.get(id=id)
         room.delete()
@@ -61,11 +62,16 @@ def delete_room(request, id):
         return HttpResponse(f"Nie ma sali o takim id.")
 
 
-def edit_room(request,id):
+def edit_room(request, id):
+    '''Edytowanie sali ( /room/modify/{id}).'''
+    rooms = Room.objects.get(id=id)
     if request.method == "GET":
-        return render(request, "edit_room.html")
+
+        context = {
+            'rooms': rooms,
+        }
+        return render(request, "edit_room.html", context)
     if request.method == "POST":
-        rooms = Room.objects.get(id=id)
         rooms.name = request.POST['name']
         rooms.capacity = request.POST['capacity']
         if request.POST['projector'] == "Tak":
@@ -81,4 +87,4 @@ def edit_room(request,id):
         if request.POST['air_conditioning'] == "Nie":
             rooms.air_conditioning = False
         rooms.save()
-        return HttpResponse(f"Sala {rooms.name} została usunięta.")
+        return HttpResponse(f"Sala {rooms.name} została zmieniona.")
