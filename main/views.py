@@ -4,6 +4,7 @@ from main.models import Room, Reservation
 from django.views import View
 from django.http import HttpResponse
 from datetime import datetime
+
 def test(request):
     return HttpResponse("test")
 
@@ -57,4 +58,57 @@ def delete_room(request, id):
         return HttpResponse(f"Sala {room.name} została usunięta.")
     else:
         return HttpResponse(f"Nie ma sali o takim id.")
+
+def form(request):
+    rooms = Room.objects.all()
+    return render(request, 'form.html', {'rooms':rooms})
+
+
+def search(request):
+    if request.method == 'GET':
+
+        id = int(request.GET['id'])
+        least_capacity = request.GET.get('least_capacity', False)
+        projector = request.GET.get('projector', False)
+        date = request.GET.get('date', False)
+
+        rooms = list(range(4))
+
+        if id != -1:
+            rooms[0] = Room.objects.filter(id=id)
+        else:
+            rooms[0] = Room.objects.all()
+
+        if least_capacity:
+            rooms[1] = Room.objects.filter(capacity__gte=int(least_capacity))
+        else:
+            rooms[1] = Room.objects.all()
+
+        if projector:
+            rooms[2] = Room.objects.filter(projector=True)
+        else:
+            rooms[2] = Room.objects.all()
+
+        if date:
+            date = datetime.strptime(date, "%Y-%m-%d")
+            booked_rooms = [room for room in Room.objects.all() if Reservation.objects.filter(date=date).filter(rooms=room)]
+            rooms[3] = [room for room in Room.objects.all() if room not in booked_rooms]
+        else:
+            rooms[3] = Room.objects.all()
+
+        for i in range(4):
+            rooms[i] = set(rooms[i])
+
+        results = rooms[0]
+
+        for i in range(1,4):
+            results = results.intersection(rooms[i])
+
+        results = list(results)
+
+        if results:
+            return render(request, 'list_available_rooms.html', {'results': results})
+        else:
+            return HttpResponse('Brak wolnych sal dla podanych kryteriów wyszukiwania')
+
 

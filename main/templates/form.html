@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>formularz</title>
+</head>
+<body>
+<form action="/search" method="GET">
+Wybierz salę, którą chcesz zarezerwować:
+    <select name="id">
+        {% for room in rooms %}
+        <option value="{{ room.id }}">
+            {{ room }}
+        </option>
+        {% endfor %}
+            <option value="-1"></option>
+    </select><br>
+Podaj minimalny rozmiar sali:
+    <label>
+        <input type="number" name="least_capacity">
+    </label><br>
+Dostępność rzutnika:
+<label>
+    <input type="checkbox" name="projector" value="check">
+</label><br>
+Data rezerwacji:
+<label>
+    <input type="date" name="date">
+</label><br>
+<label>
+    <input type="submit" value="Sprawdź">
+</label>
+
+</form>
+</body>
+</html>
