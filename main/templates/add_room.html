@@ -1,28 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Add room</title>
-</head>
-<body>
+{% extends 'template.html' %}
+
+{% block content %}
 <form method="post">
-    {% csrf_token %}
-    <label>Dodaj salę:
-        <input type="text" name="name">
-    </label><br>
-    <label>Liczba osób, które sala może pomieścić:
-        <input type="text" name="capacity">
-    </label><br>
-    <label>Projektor (wpisz "tak" lub "nie"):
-        <input type="text" name="projector">
-    </label><br>
-    <label>Telewizor (wpisz "tak" lub "nie"):
-        <input type="text" name="tv">
-    </label><br>
-    <label>Klimatyzacja (wpisz "tak" lub "nie"):
-        <input type="text" name="air_conditioning">
-    </label><br>
-    <input type="submit" name="submit" value="Wyślij">
+   {% csrf_token %}
+   <label>Dodaj salę:
+       <input type="text" name="name">
+   </label><br>
+   <label>Liczba osób, które sala może pomieścić:
+       <input type="text" name="capacity">
+   </label><br>
+   <label>Projektor (wpisz "tak" lub "nie"):
+       <input type="text" name="projector">
+   </label><br>
+   <label>Telewizor (wpisz "tak" lub "nie"):
+       <input type="text" name="tv">
+   </label><br>
+   <label>Klimatyzacja (wpisz "tak" lub "nie"):
+       <input type="text" name="air_conditioning">
+   </label><br>
+   <input type="submit" name="submit" value="Wyślij">
 </form>
-</body>
-</html>
+{% endblock %}

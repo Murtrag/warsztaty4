@@ -47,3 +47,25 @@ def delete_room(request, id):
     else:
         return HttpResponse(f"Nie ma sali o takim id.")
 
+
+def edit_room(request,id):
+    if request.method == "GET":
+        return render(request, "edit_room.html")
+    if request.method == "POST":
+        rooms = Room.objects.get(id=id)
+        rooms.name = request.POST['name']
+        rooms.capacity = request.POST['capacity']
+        if request.POST['projector'] == "Tak":
+            rooms.projector = True
+        if request.POST['projector'] == "Nie":
+            rooms.projector = False
+        if request.POST['tv'] == "Tak":
+            rooms.tv = True
+        if request.POST['tv'] == "Nie":
+            rooms.tv = False
+        if request.POST['air_conditioning'] == "Tak":
+            rooms.air_conditioning = True
+        if request.POST['air_conditioning'] == "Nie":
+            rooms.air_conditioning = False
+        rooms.save()
+        return HttpResponse(f"Sala {rooms.name} została usunięta.")

@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     url('^all_rooms/', views.RoomList.as_view()),
     url(r'^room/new$', views.add_room),
-    url(r'^room/delete/(?P<id>\d+)$', views.delete_room)
+    url(r'^room/delete/(?P<id>\d+)$', views.delete_room),
+    url(r'^room/modify/(?P<id>\d+)$', views.edit_room),
 
 ]
