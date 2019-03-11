@@ -1,0 +1,49 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<i class="fa fa-address-book" aria-hidden="true"></i>
+
+
+
+Nazwa: {{room.0.name}}<br>
+<div class="row">
+    <div class="col-sm-6">
+        <i class="fa fa-bed" aria-hidden="true"></i>
+        Ilość pomieszczeń: {{room.0.capacity}}<br>
+        <i class="fa fa-camera" aria-hidden="true"></i>
+        Obecność projektora:
+        {% if room.0.projector %}
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        {% else%}
+            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        {% endif %}
+        <br>
+        <i class="fa fa-television" aria-hidden="true"></i>
+        Obecnosć telewizji:
+        {% if room.0.tv %}
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        {% else%}
+            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        {% endif %}
+        <br>
+        <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
+        Klimatyzacja:
+        {% if room.0.air_conditioning %}
+            <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+        {% else%}
+            <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+        {% endif %}
+        <br>
+    </div>
+    <div class="col-sm-6">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        Zajęte terminy:<br><br>
+            {% for term in  room.1 %}
+               <i class="fa fa-times" aria-hidden="true"></i>
+             {{term}}
+            {% endfor %}
+        <br><br>
+        <button type="button" class="btn btn-success">Zarezerwuj!</button>
+    </div>
+</div>
+{% endblock %}
