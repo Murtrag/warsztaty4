@@ -1,16 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>list_available_rooms</title>
-</head>
-<body>
-<ol>
-{% for room in results %}
-    <li>
-        {{ room }}
-    </li>
-{% endfor %}
-</ol>
-</body>
-</html>
+{% extends 'template.html' %}
+
+
+{% block title %}list_available_rooms{% endblock %}
+{% block content %}
+
+    <ol>
+    {% for room in results %}
+        <li>
+            {{ room }}
+        </li>
+    {% endfor %}
+    </ol>
+
+{% endblock %}

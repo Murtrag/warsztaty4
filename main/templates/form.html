@@ -1,10 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>formularz</title>
-</head>
-<body>
+{% extends 'template.html' %}
+
+
+{% block title %}formularz{% endblock %}
+{% block content %}
 <form action="/search" method="GET">
 Wybierz salę, którą chcesz zarezerwować:
     <select name="id">
@@ -32,5 +30,4 @@ Data rezerwacji:
 </label>
 
 </form>
-</body>
-</html>
+{% endblock %}

@@ -2,7 +2,7 @@
 
 {% block content %}
     {% for room in Rooms %}
-<a href="{% url 'room_detail' room.0.pk%}">{{room.0}}</a> &nbsp;
+        <a href="{% url 'room_detail' room.0.pk%}">{{room.0}}</a> &nbsp;
     wolna dziś:
     {% if today in room.1 %}
         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
