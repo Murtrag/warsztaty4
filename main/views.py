@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from main.models import Room, Reservation
 from django.views import View
@@ -144,9 +144,11 @@ def search(request):
             return HttpResponse('Brak wolnych sal dla podanych kryteriów wyszukiwania')
 
 def reservation(request, id):
-    id = int(id)
-    room = Room.objects.get(id=id)
+    '''rezerwacja sali, widok dostępny tylko metodą POST (formularz w widoku sali)'''
     if request.method == 'POST':
+
+        id = int(id)
+        room = Room.objects.get(id=id)
 
         date = request.POST.get('date', False)
         if not date:
