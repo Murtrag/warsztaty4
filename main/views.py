@@ -5,14 +5,18 @@ from django.views import View
 from django.http import HttpResponse
 from datetime import datetime
 
+
 def test(request):
     return HttpResponse("test")
 
+
 class RoomList(View):
     '''7. Pokazanie wszystkich sal ( adres /).'''
+
     def get(self, request):
         context = {
-            "Rooms": [[x,[y.date for y in x.reservation_set.all()]] for x in Room.objects.all()],
+            "Rooms": [[x, [y.date for y in x.reservation_set.all()]] for x in
+                      Room.objects.all()],
             "today": datetime.today().date()
         }
         return render(request, "list_room.html", context)
@@ -20,13 +24,15 @@ class RoomList(View):
 
 class DetailRoom(View):
     '''Pokazanie danych jednej sali ( /room/{id}).'''
+
     def get(self, request, pk):
         room = Room.objects.get(pk=pk)
         context = {
-            "room": [room, room.reservation_set.filter(date__gte=datetime.today().date()).values_list("date", flat=True)]
+            "room": [room, room.reservation_set.filter(
+                date__gte=datetime.today().date()).values_list("date",
+                                                               flat=True)]
         }
         return render(request, "detail_room.html", context)
-
 
 
 def add_room(request):
@@ -63,12 +69,10 @@ def delete_room(request, id):
         return HttpResponse(f"Nie ma sali o takim id.")
 
 
-
 def edit_room(request, id):
     '''Edytowanie sali ( /room/modify/{id}).'''
     rooms = Room.objects.get(id=id)
     if request.method == "GET":
-
         context = {
             'rooms': rooms,
         }
@@ -91,9 +95,10 @@ def edit_room(request, id):
         rooms.save()
         return HttpResponse(f"Sala {rooms.name} została zmieniona.")
 
+
 def form(request):
     rooms = Room.objects.all()
-    return render(request, 'form.html', {'rooms':rooms})
+    return render(request, 'form.html', {'rooms': rooms})
 
 
 def search(request):
@@ -123,8 +128,11 @@ def search(request):
 
         if date:
             date = datetime.strptime(date, "%Y-%m-%d")
-            booked_rooms = [room for room in Room.objects.all() if Reservation.objects.filter(date=date).filter(rooms=room)]
-            rooms[3] = [room for room in Room.objects.all() if room not in booked_rooms]
+            booked_rooms = [room for room in Room.objects.all() if
+                            Reservation.objects.filter(date=date).filter(
+                                rooms=room)]
+            rooms[3] = [room for room in Room.objects.all() if
+                        room not in booked_rooms]
         else:
             rooms[3] = Room.objects.all()
 
@@ -133,16 +141,14 @@ def search(request):
 
         results = rooms[0]
 
-        for i in range(1,4):
+        for i in range(1, 4):
             results = results.intersection(rooms[i])
 
         results = list(results)
 
         if results:
-            return render(request, 'list_available_rooms.html', {'results': results})
+            return render(request, 'list_available_rooms.html',
+                          {'results': results})
         else:
-            return HttpResponse('Brak wolnych sal dla podanych kryteriów wyszukiwania')
-
-
-
-
+            return HttpResponse(
+                'Brak wolnych sal dla podanych kryteriów wyszukiwania')
