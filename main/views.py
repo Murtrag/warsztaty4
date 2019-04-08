@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from main.models import Room, Reservation
 from django.views import View
@@ -152,3 +152,24 @@ def search(request):
         else:
             return HttpResponse(
                 'Brak wolnych sal dla podanych kryteriów wyszukiwania')
+
+
+def reservation(request, id):
+    '''rezerwacja sali, widok dostępny tylko metodą POST (formularz w widoku sali)'''
+    if request.method == 'POST':
+
+        id = int(id)
+        room = Room.objects.get(id=id)
+
+        date = request.POST.get('date', False)
+        if not date:
+            return HttpResponse("Proszę podać datę rezerwacji")
+        date = datetime.strptime(date, "%Y-%m-%d")
+        if date < datetime.today():
+            return HttpResponse("Błąd! Data rezerwacji jest datą przeszłą!")
+        if Reservation.objects.filter(rooms=room).filter(date=date):
+            return HttpResponse(
+                "Błąd! Sala jest już zarezerwowana na wybrany dzień!")
+        reservation = Reservation.objects.create(rooms=room, date=date)
+        reservation.save()
+        return redirect('room_detail', pk=id)

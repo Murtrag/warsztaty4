@@ -43,7 +43,14 @@ Nazwa: {{room.0.name}}<br>
              {{term}}
             {% endfor %}
         <br><br>
-        <button type="button" class="btn btn-success">Zarezerwuj!</button>
+        <form action="/reservation/{{ room.0.id }}" method="POST">
+            {% csrf_token %}
+            Wybierz termin rezerwacji:
+            <label>
+             <input type="date" name="date">
+            </label><br>
+        <button type="submit" class="btn btn-success">Zarezerwuj!</button>
+        </form>
     </div>
 </div>
 {% endblock %}
