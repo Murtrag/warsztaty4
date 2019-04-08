@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load staticfiles %}
     <meta charset="UTF-8">
     <title>Rezerwacja sal konferencyjnych</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css">
-
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
 
 </head>
 <body>
+<style>
+    .container{
+        background-color: black;
+        min-height: 500px;
+    }
+    img{
+        display: block;
+        float: left;
+    }
+    .header h1{
+        margin-bottom: 50px;
+        margin-top: 20px;
+
+    }
+</style>
 <div class="container">
+    <div class="row header">
+        <div class="col-sm-4">
+            <img src="{% static 'img/banner.png' %}" width="350px">
+        </div>
+        <div class="col-sm-8">
+            <h1>Wynajem salek konferencyjnych</h1>
+            <button type="button" class="btn btn-outline-primary">Primary</button>
+            <button type="button" class="btn btn-outline-secondary">Secondary</button>
+            <button type="button" class="btn btn-outline-success">Success</button>
+            <button type="button" class="btn btn-outline-danger">Danger</button>
+            <button type="button" class="btn btn-outline-warning">Warning</button>
+            <button type="button" class="btn btn-outline-info">Info</button>
+            <button type="button" class="btn btn-outline-light">Light</button>
+            <button type="button" class="btn btn-outline-dark">Dark</button>
+        </div>
+    </div>
+    <br>
     {% block content %}
     {% endblock %}
 </div>

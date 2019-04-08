@@ -2,6 +2,8 @@
 
 import os
 
+from django.conf.global_settings import STATIC_ROOT
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
@@ -99,3 +101,5 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
+# STATIC_ROOT = "/var/www/example.com/static/"
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
