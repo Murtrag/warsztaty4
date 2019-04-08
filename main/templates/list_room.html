@@ -15,7 +15,12 @@
     </a>
     <br><br>
     {% endfor %}
-
+        <div>
+        <form action="/room/new" method="GET">
+            {% csrf_token %}
+        <button type="submit" class="btn btn-success">Dodaj nową salę</button>
+        </form>
+    </div>
 
 
 {% endblock %}
