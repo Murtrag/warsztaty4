@@ -7,6 +7,7 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', views.RoomList.as_view()),
     url('^all_rooms/', views.RoomList.as_view(), name="all_rooms"),
     url(r'^room/new/$', views.add_room, name="room_new"),
     url(r'^room/delete/(?P<id>\d+)$', views.delete_room, name="room_delete"),
