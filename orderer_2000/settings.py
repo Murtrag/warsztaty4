@@ -2,6 +2,7 @@
 
 import os
 
+
 from django.conf.global_settings import STATIC_ROOT
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -54,20 +55,18 @@ TEMPLATES = [
     },
 ]
 
+
+# Database
+# https://docs.djangoproject.com/en/2.2/ref/settings/#databases
+
+try:
+    from orderer_2000.local_settings import DATABASES
+except ModuleNotFoundError:
+    print("Brak konfiguracji bazy danych w pliku local_settings.py!")
+    print("Uzupełnij dane i spróbuj ponownie!")
+    exit(0)
+
 WSGI_APPLICATION = 'orderer_2000.wsgi.application'
-
-
-
-DATABASES = {
-    'default': {
-        'HOST': '127.0.0.1',
-        'NAME': 'orderer_2000',
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'USER': 'postgres',
-        'PASSWORD': 'coderslab',
-    }
-}
-
 
 
 
