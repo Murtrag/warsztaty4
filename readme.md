@@ -34,7 +34,7 @@ pip install psycopg2-binary
 ```
 
 ## Development Tips
-1. Please create a new templates in the following way:
+1. Please create new templates in the following way:
 
 ```
 {% extends 'template.html' %}
