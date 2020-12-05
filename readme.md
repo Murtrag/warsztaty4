@@ -48,7 +48,7 @@ pip install psycopg2-binary
 
 2. Librarys
 
-  * awesomeicons4.8
+  * awesomeicons 4.8
 
     - icons: https://fontawesome.com/v4.7.0/icons/
 
