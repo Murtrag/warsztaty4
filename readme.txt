@@ -1,14 +1,36 @@
 ### Room Booker
 
-1. tworzymy w bazie danych bazę danych o nazwie orderer_2000
+## Install
+1. Run docker container with Postgres
+```
+$ docker run --name postgres-docker -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
+```
+2. Create `local_settings.py` in orderer_2000 and fill it up with configuration e.g.
+```
+DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'postgres',
+            'USER': 'postgres',
+            'PASSWORD': 'postgres',
+            'HOST': 'localhost',
+            'PORT': '5432',
+            }
+        }
 
-poleceniem:
+```
+3. Install requirements:
+```
+pip3 install -r requirements.txt
+```
 
-CREATE DATABASE orderer_2000;
+4. Migrate database
+```
+./manage.py migrate
+```
 
-
-2. Tworzenie template:
-Proszę template tworzyć w następującym formacjie
+## Development Tips
+Please create a new templates in the following way:
 
 ```
 {% extends 'template.html' %}
@@ -20,8 +42,8 @@ Proszę template tworzyć w następującym formacjie
 {% endblock %}
 ```
 
-3. Biblioteka awesomeicons4.8
-ikonki: https://fontawesome.com/v4.7.0/icons/
-przykład użycia: <i class="fa fa-thumbs-up" aria-hidden="true"></i>
+3. Library awesomeicons4.8
+icons: https://fontawesome.com/v4.7.0/icons/
+sample use: <i class="fa fa-thumbs-up" aria-hidden="true"></i>
 
 
