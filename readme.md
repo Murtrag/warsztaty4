@@ -1,4 +1,4 @@
-### Room Booker
+# Room Booker
 
 ## Install
 1. Run docker container with Postgres
@@ -23,6 +23,10 @@ DATABASES = {
 ```
 pip3 install -r requirements.txt
 ```
+if psycopg cause problems then try:
+```
+pip install psycopg2-binary
+```
 
 4. Migrate database
 ```
@@ -30,7 +34,7 @@ pip3 install -r requirements.txt
 ```
 
 ## Development Tips
-Please create a new templates in the following way:
+1. Please create a new templates in the following way:
 
 ```
 {% extends 'template.html' %}
@@ -42,7 +46,9 @@ Please create a new templates in the following way:
 {% endblock %}
 ```
 
-3. Library awesomeicons4.8
+2. Librarys
+
+* awesomeicons4.8
 icons: https://fontawesome.com/v4.7.0/icons/
 sample use: <i class="fa fa-thumbs-up" aria-hidden="true"></i>
 
