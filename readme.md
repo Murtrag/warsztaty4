@@ -49,7 +49,9 @@ pip install psycopg2-binary
 2. Librarys
 
 * awesomeicons4.8
+
 icons: https://fontawesome.com/v4.7.0/icons/
+
 sample use: <i class="fa fa-thumbs-up" aria-hidden="true"></i>
 
 
