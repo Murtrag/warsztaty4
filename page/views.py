@@ -10,6 +10,7 @@ from django.contrib import messages
 
 
 class RoomList(ListView):
+    paginate_by = 10
     model = Room
     template_name = "list_room.html"
 
