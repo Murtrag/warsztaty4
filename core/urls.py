@@ -14,6 +14,8 @@ urlpatterns = [
     url(r"^room/(?P<pk>\d+)", views.DetailRoom.as_view(), name="room_detail"),
     url(r"^room/modify/(?P<pk>\d+)$", views.EditRoom.as_view(), name="room_edit"),
     url(r"^search/", views.SearchView.as_view(), name="search"),
-    url(r"^reservation/(?P<id>\d+)", views.reservation, name="reservation"),
+    url(
+        r"^reservation/(?P<pk>\d+)", views.ReservationView.as_view(), name="reservation"
+    ),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

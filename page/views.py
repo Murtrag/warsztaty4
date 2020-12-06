@@ -68,21 +68,24 @@ class SearchView(View):
             )
 
 
-def reservation(request, id):
-    """rezerwacja sali, widok dostępny tylko metodą POST (formularz w widoku sali)"""
-    if request.method == "POST":
-
-        id = int(id)
-        room = Room.objects.get(id=id)
-
-        date = request.POST.get("date", False)
-        if not date:
-            return HttpResponse("Proszę podać datę rezerwacji")
-        date = datetime.strptime(date, "%Y-%m-%d")
-        if date < datetime.today():
-            return HttpResponse("Błąd! Data rezerwacji jest datą przeszłą!")
-        if Reservation.objects.filter(rooms=room).filter(date=date):
-            return HttpResponse("Błąd! Sala jest już zarezerwowana na wybrany dzień!")
-        reservation = Reservation.objects.create(rooms=room, date=date)
-        reservation.save()
-        return redirect("room_detail", pk=id)
+class ReservationView(View):
+    def post(self, request, pk):
+        pk = self.kwargs["pk"]
+        room = Room.objects.get(pk=pk)
+        date_string = request.POST.get("date")
+        if date_string != "":
+            date = datetime.strptime(date_string, "%Y-%m-%d")
+            if date < datetime.today():
+                pass
+                # @TODO django message about old date
+            elif len(Reservation.objects.filter(rooms=room, date=date)) > 0:
+                pass
+                # @TODO django message about already booked date
+            else:
+                # @TODO django message about success
+                r = Reservation.objects.create(rooms=room, date=date)
+                r.save()
+        else:
+            pass
+            # @TODO django message about no date
+        return redirect("room_detail", pk=pk)
