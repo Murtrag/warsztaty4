@@ -5,7 +5,7 @@
 ```
 $ docker run --name postgres-docker -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 ```
-2. Create `local_settings.py` in orderer_2000 and fill it up with configuration e.g.
+2. Create `local_settings.py` in core and fill it up with configuration e.g.
 ```
 DATABASES = {
         'default': {
@@ -53,5 +53,11 @@ pip install psycopg2-binary
     - icons: https://fontawesome.com/v4.7.0/icons/
 
     - sample use: `<i class="fa fa-thumbs-up" aria-hidden="true"></i>`
+    
+ 
+  * bootstrap 4.4.1
+
+    - documentation: https://getbootstrap.com/docs/4.0/getting-started/introduction/
+    
 
 
