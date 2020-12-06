@@ -30,33 +30,6 @@ class DeleteRoom(edit.DeleteView):
     template_name = "remove_room.html"
 
 
-# def edit_room(request, id):
-#     """Edytowanie sali ( /room/modify/{id})."""
-#     rooms = Room.objects.get(id=id)
-#     if request.method == "GET":
-#         context = {
-#             "rooms": rooms,
-#         }
-#         return render(request, "edit_room.html", context)
-#     if request.method == "POST":
-#         rooms.name = request.POST["name"]
-#         rooms.capacity = request.POST["capacity"]
-#         if request.POST["projector"] == "Tak":
-#             rooms.projector = True
-#         if request.POST["projector"] == "Nie":
-#             rooms.projector = False
-#         if request.POST["tv"] == "Tak":
-#             rooms.tv = True
-#         if request.POST["tv"] == "Nie":
-#             rooms.tv = False
-#         if request.POST["air_conditioning"] == "Tak":
-#             rooms.air_conditioning = True
-#         if request.POST["air_conditioning"] == "Nie":
-#             rooms.air_conditioning = False
-#         rooms.save()
-#         return HttpResponse(f"Sala {rooms.name} została zmieniona.")
-
-
 class EditRoom(edit.UpdateView):
     model = Room
     template_name = "edit_room.html"
