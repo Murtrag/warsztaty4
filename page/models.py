@@ -32,7 +32,7 @@ class Reservation(models.Model):
 
 
 class Image(models.Model):
-    image = models.ImageField(upload_to="media")
+    image = models.ImageField(upload_to="galery")
 
     def __str__(self):
         return os.path.splitext(os.path.basename(self.image.name))[0]

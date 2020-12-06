@@ -75,3 +75,9 @@ label{
 	border-color: #28a745;
 
 }
+.carousel.slide img{
+	max-height: 13rem;
+}
+.col-4{
+	margin-bottom: 3rem;
+}

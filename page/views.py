@@ -11,7 +11,7 @@ from django.core.paginator import Paginator
 
 
 class RoomList(ListView):
-    paginate_by = 7
+    paginate_by = 6
     model = Room
     template_name = "list_room.html"
 
@@ -52,7 +52,7 @@ class EditRoom(SuccessMessageMixin, edit.UpdateView):
 
 
 class SearchView(View):
-    paginate_by = 7
+    paginate_by = 6
 
     def get(self, request):
         if len(request.GET) == 0:

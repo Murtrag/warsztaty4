@@ -6,27 +6,29 @@ list available rooms
 {% endblock %}
 {% block content %}
 
-<ol>
+<div class="row">
 	{% for room in page_obj %}
+	<div class="col-4">
+		{% include "image_carousel.html" with images=room.images.all number=forloop.counter %}
 
-	<a href="{% url 'room_detail' room.pk%}">{{room.name}}</a> &nbsp;
-	wolna dziś:
-	{% if room.is_booked %}
-	<i class="fa fa-thumbs-down" aria-hidden="true"></i>
-	{% else %}
-	<i class="fa fa-thumbs-up" aria-hidden="true"></i>
-	{% endif %}<br>
-	<a href="{% url 'room_edit' room.pk %}">
-		<button type="button" class="btn btn-warning">Edytuj</button>
-	</a>
-	<a href="{% url 'room_delete' room.pk %}">
-		<button type="button" class="btn btn-danger">Usuń</button>
-	</a>
-	<br><br>
+		<a href="{% url 'room_detail' room.pk%}">{{room.name}}</a> &nbsp;
+		wolna dziś:
+		{% if room.is_booked %}
+		<i class="fa fa-thumbs-down" aria-hidden="true"></i>
+		{% else %}
+		<i class="fa fa-thumbs-up" aria-hidden="true"></i>
+		{% endif %}<br>
+		<a href="{% url 'room_edit' room.pk %}">
+			<button type="button" class="btn btn-warning">Edytuj</button>
+		</a>
+		<a href="{% url 'room_delete' room.pk %}">
+			<button type="button" class="btn btn-danger">Usuń</button>
+		</a>
+	</div>
 	{% empty %}
 	<h3>Brak wynikow dla podanych kryteriów wyszukiwania</h3>
 	{% endfor %}
-</ol>
+</div>
 {% include 'paginator.html' %}
 
 
