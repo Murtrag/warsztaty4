@@ -9,7 +9,9 @@
     {% else %}
         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
     {% endif %}<br>
+    <a href="{% url 'room_edit' room.pk %}">
     <button type="button" class="btn btn-warning">Edytuj</button>
+    </a>
     <a href="{% url 'room_delete' room.pk %}">
         <button type="button" class="btn btn-danger">Usuń</button>
     </a>
