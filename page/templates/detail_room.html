@@ -49,10 +49,15 @@ Nazwa: {{room.name}}<br>
         <br><br>
         <form action="/reservation/{{ room.id }}" method="POST">
             {% csrf_token %}
+            <label for="date">
             Wybierz termin rezerwacji:
-            <label>
-             <input type="date" name="date">
-            </label><br>
+            </label>
+             <input id="date" type="date" name="date">
+            <label for="client">
+		    Na kogo dokonać rezerwacji
+	    </label>
+             <input id="client" type="text" name="client">
+	     <br />
         <button type="submit" class="btn btn-success">Zarezerwuj!</button>
         </form>
     </div>

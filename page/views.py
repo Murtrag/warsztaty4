@@ -73,6 +73,7 @@ class ReservationView(View):
         pk = self.kwargs["pk"]
         room = Room.objects.get(pk=pk)
         date_string = request.POST.get("date")
+        client = request.POST.get("client")
         if date_string != "":
             date = datetime.strptime(date_string, "%Y-%m-%d")
             if date < datetime.today():
@@ -83,7 +84,7 @@ class ReservationView(View):
                 # @TODO django message about already booked date
             else:
                 # @TODO django message about success
-                r = Reservation.objects.create(rooms=room, date=date)
+                r = Reservation.objects.create(rooms=room, date=date, client=client)
                 r.save()
         else:
             pass
