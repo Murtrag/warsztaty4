@@ -8,28 +8,48 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Room',
+            name="Room",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=64)),
-                ('capacity', models.IntegerField()),
-                ('projector', models.BooleanField(default=False)),
-                ('tv', models.BooleanField(default=False)),
-                ('air_conditioning', models.BooleanField(default=False)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=64)),
+                ("capacity", models.IntegerField()),
+                ("projector", models.BooleanField(default=False)),
+                ("tv", models.BooleanField(default=False)),
+                ("air_conditioning", models.BooleanField(default=False)),
             ],
         ),
         migrations.CreateModel(
-            name='Reservation',
+            name="Reservation",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('date', models.DateField()),
-                ('comment', models.TextField()),
-                ('rooms', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='main.Room')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("date", models.DateField()),
+                ("comment", models.TextField()),
+                (
+                    "rooms",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="main.Room"
+                    ),
+                ),
             ],
         ),
     ]
