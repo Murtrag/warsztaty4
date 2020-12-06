@@ -38,7 +38,7 @@ form{
 	list-style-type: none;
 }
 label{
-	min-width: 10vw;
+	min-width: 15rem;
 }
 
 .page-link {
@@ -80,4 +80,8 @@ label{
 }
 .col-4{
 	margin-bottom: 3rem;
+}
+
+.div__detail .carousel.slide{
+	margin: 2rem 0 3rem 0;
 }

@@ -3,7 +3,7 @@
 {% block content %}
 <i class="fa fa-address-book" aria-hidden="true"></i>
 Nazwa: {{room.name}}<br>
-<div class="row">
+<div class="row div__detail">
     <div class="col-sm-6">
         <i class="fa fa-bed" aria-hidden="true"></i>
         Ilość pomieszczeń: {{room.capacity}}<br>
@@ -31,6 +31,7 @@ Nazwa: {{room.name}}<br>
             <i class="fa fa-thumbs-down" aria-hidden="true"></i>
         {% endif %}
         <br>
+	{% include "image_carousel.html" with images=room.images.all number=1 %}
     </div>
     <div class="col-sm-6">
         <i class="fa fa-calendar" aria-hidden="true"></i>
