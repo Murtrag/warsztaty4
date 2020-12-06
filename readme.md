@@ -5,7 +5,7 @@
 ```
 $ docker run --name postgres-docker -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
 ```
-2. Create `local_settings.py` in core and fill it up with configuration e.g.
+2. Create `local_settings.py` in core app and fill it up with configuration e.g.
 ```
 DATABASES = {
         'default': {
