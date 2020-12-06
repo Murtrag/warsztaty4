@@ -4,15 +4,6 @@
 {% block title %}formularz{% endblock %}
 {% block content %}
 <form action="/search" method="GET">
-Wybierz salę, którą chcesz zarezerwować:
-    <select name="id">
-        {% for room in rooms %}
-        <option value="{{ room.id }}">
-            {{ room }}
-        </option>
-        {% endfor %}
-            <option value="-1"></option>
-    </select><br>
 Podaj minimalny rozmiar sali:
     <label>
         <input type="number" name="least_capacity">
