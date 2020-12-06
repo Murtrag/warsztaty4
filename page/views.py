@@ -7,10 +7,11 @@ from django.views.generic import ListView, DetailView, edit
 from django.contrib.messages.views import SuccessMessageMixin
 from datetime import datetime
 from django.contrib import messages
+from django.core.paginator import Paginator
 
 
 class RoomList(ListView):
-    paginate_by = 10
+    paginate_by = 7
     model = Room
     template_name = "list_room.html"
 
@@ -51,6 +52,8 @@ class EditRoom(SuccessMessageMixin, edit.UpdateView):
 
 
 class SearchView(View):
+    paginate_by = 7
+
     def get(self, request):
         if len(request.GET) == 0:
             return render(request, "search_room.html")
@@ -69,10 +72,14 @@ class SearchView(View):
             if date is not False:
                 filters.update({"date": datetime.strptime(date, "%Y-%m-%d")})
 
+            page_number = request.GET.get("page")
+            paginator = Paginator(Room.objects.filter(**filters), self.paginate_by)
+            page_obj = paginator.get_page(page_number)
+
             return render(
                 request,
                 "list_available_rooms.html",
-                {"results": Room.objects.filter(**filters)},
+                {"page_obj": page_obj},
             )
 
 

@@ -7,7 +7,7 @@ list available rooms
 {% block content %}
 
 <ol>
-	{% for room in results %}
+	{% for room in page_obj %}
 
 	<a href="{% url 'room_detail' room.pk%}">{{room.name}}</a> &nbsp;
 	wolna dziś:
@@ -27,5 +27,7 @@ list available rooms
 	<h3>Brak wynikow dla podanych kryteriów wyszukiwania</h3>
 	{% endfor %}
 </ol>
+{% include 'paginator.html' %}
+
 
 {% endblock %}
