@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from page.models import Room, Reservation
 from django.views import View
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 from datetime import datetime
 
 
@@ -11,23 +11,9 @@ class RoomList(ListView):
     template_name = "list_room.html"
 
 
-class DetailRoom(View):
-    """
-    Pokazanie danych jednej sali ( /room/{id}).
-    @TODO DetailView?
-    """
-
-    def get(self, request, pk):
-        room = Room.objects.get(pk=pk)
-        context = {
-            "room": [
-                room,
-                room.reservation_set.filter(
-                    date__gte=datetime.today().date()
-                ).values_list("date", flat=True),
-            ]
-        }
-        return render(request, "detail_room.html", context)
+class DetailRoom(DetailView):
+    model = Room
+    template_name = "detail_room.html"
 
 
 def add_room(request):

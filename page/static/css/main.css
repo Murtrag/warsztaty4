@@ -4,3 +4,6 @@ body {
 .container{
     backgroud-color: black;
 }
+.list_terms{
+	list-style-type: none;
+}

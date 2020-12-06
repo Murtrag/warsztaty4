@@ -5,14 +5,14 @@
 
 
 
-Nazwa: {{room.0.name}}<br>
+Nazwa: {{room.name}}<br>
 <div class="row">
     <div class="col-sm-6">
         <i class="fa fa-bed" aria-hidden="true"></i>
-        Ilość pomieszczeń: {{room.0.capacity}}<br>
+        Ilość pomieszczeń: {{room.capacity}}<br>
         <i class="fa fa-camera" aria-hidden="true"></i>
         Obecność projektora:
-        {% if room.0.projector %}
+        {% if room.projector %}
             <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         {% else%}
             <i class="fa fa-thumbs-down" aria-hidden="true"></i>
@@ -20,7 +20,7 @@ Nazwa: {{room.0.name}}<br>
         <br>
         <i class="fa fa-television" aria-hidden="true"></i>
         Obecnosć telewizji:
-        {% if room.0.tv %}
+        {% if room.tv %}
             <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         {% else%}
             <i class="fa fa-thumbs-down" aria-hidden="true"></i>
@@ -28,7 +28,7 @@ Nazwa: {{room.0.name}}<br>
         <br>
         <i class="fa fa-thermometer-empty" aria-hidden="true"></i>
         Klimatyzacja:
-        {% if room.0.air_conditioning %}
+        {% if room.air_conditioning %}
             <i class="fa fa-thumbs-up" aria-hidden="true"></i>
         {% else%}
             <i class="fa fa-thumbs-down" aria-hidden="true"></i>
@@ -38,12 +38,16 @@ Nazwa: {{room.0.name}}<br>
     <div class="col-sm-6">
         <i class="fa fa-calendar" aria-hidden="true"></i>
         Zajęte terminy:<br><br>
-            {% for term in  room.1 %}
+		<ul class="list_terms">
+            {% for term in  room.reservation_set.all %}
+	    <li>
                <i class="fa fa-times" aria-hidden="true"></i>
-             {{term}}
+	       {{term.date}} by {{term.client}}
+	    </li>
             {% endfor %}
+	    	</ul>
         <br><br>
-        <form action="/reservation/{{ room.0.id }}" method="POST">
+        <form action="/reservation/{{ room.id }}" method="POST">
             {% csrf_token %}
             Wybierz termin rezerwacji:
             <label>
