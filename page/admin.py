@@ -1,5 +1,5 @@
 from django.contrib import admin
-from main.models import Room, Reservation, Image
+from page.models import Room, Reservation, Image
 
 
 class RoomAdmin(admin.ModelAdmin):

@@ -10,6 +10,9 @@ class Room(models.Model):
     air_conditioning = models.BooleanField(default=False)
     images = models.ManyToManyField("Image")
 
+    def __str__(self):
+        return self.name
+
 
 class Reservation(models.Model):
     client = models.CharField(
