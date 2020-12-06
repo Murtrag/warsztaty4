@@ -24,14 +24,10 @@ class AddRoom(edit.CreateView):
     fields = ("name", "capacity", "projector", "tv", "air_conditioning")
 
 
-def delete_room(request, id):
-    """Usuwanie sali( /room/delete/{id})."""
-    if Room.objects.filter(id=id):
-        room = Room.objects.get(id=id)
-        room.delete()
-        return HttpResponse(f"Sala {room.name} została usunięta.")
-    else:
-        return HttpResponse(f"Nie ma sali o takim id.")
+class DeleteRoom(edit.DeleteView):
+    model = Room
+    success_url = reverse_lazy("all_rooms")
+    template_name = "remove_room.html"
 
 
 def edit_room(request, id):
