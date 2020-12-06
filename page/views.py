@@ -76,10 +76,18 @@ class ReservationView(View):
         client = request.POST.get("client")
         if date_string != "":
             date = datetime.strptime(date_string, "%Y-%m-%d")
-            if date < datetime.today():
+            if date < datetime.today().replace(
+                hour=0, minute=0, second=0, microsecond=0
+            ):
+                print(
+                    "old date",
+                    date,
+                    datetime.today().replace(hour=0, minute=0, second=0, microsecond=0),
+                )
                 pass
                 # @TODO django message about old date
             elif len(Reservation.objects.filter(rooms=room, date=date)) > 0:
+                print("date reserver")
                 pass
                 # @TODO django message about already booked date
             else:
@@ -87,6 +95,7 @@ class ReservationView(View):
                 r = Reservation.objects.create(rooms=room, date=date, client=client)
                 r.save()
         else:
+            print("no date")
             pass
             # @TODO django message about no date
         return redirect("room_detail", pk=pk)

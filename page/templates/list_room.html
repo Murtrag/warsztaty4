@@ -5,9 +5,9 @@
         <a href="{% url 'room_detail' room.pk%}">{{room.name}}</a> &nbsp;
 	wolna dziś:
     {% if room.is_booked %}
-        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
-    {% else %}
         <i class="fa fa-thumbs-down" aria-hidden="true"></i>
+    {% else %}
+        <i class="fa fa-thumbs-up" aria-hidden="true"></i>
     {% endif %}<br>
     <a href="{% url 'room_edit' room.pk %}">
     <button type="button" class="btn btn-warning">Edytuj</button>
