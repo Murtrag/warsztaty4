@@ -1,5 +1,6 @@
 import os
 from django.db import models
+from datetime import datetime
 
 
 class Room(models.Model):
@@ -9,6 +10,12 @@ class Room(models.Model):
     tv = models.BooleanField(default=False)
     air_conditioning = models.BooleanField(default=False)
     images = models.ManyToManyField("Image")
+
+    @property
+    def is_booked(self):
+        return datetime.today().date() in self.reservation_set.all().values_list(
+            "date", flat=True
+        )
 
     def __str__(self):
         return self.name

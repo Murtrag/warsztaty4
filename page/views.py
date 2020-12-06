@@ -2,29 +2,20 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from page.models import Room, Reservation
 from django.views import View
+from django.views.generic import ListView
 from datetime import datetime
 
 
-def test(request):
-    return HttpResponse("test")
-
-
-class RoomList(View):
-    """7. Pokazanie wszystkich sal ( adres /)."""
-
-    def get(self, request):
-        context = {
-            "Rooms": [
-                [x, [y.date for y in x.reservation_set.all()]]
-                for x in Room.objects.all()
-            ],
-            "today": datetime.today().date(),
-        }
-        return render(request, "list_room.html", context)
+class RoomList(ListView):
+    model = Room
+    template_name = "list_room.html"
 
 
 class DetailRoom(View):
-    """Pokazanie danych jednej sali ( /room/{id})."""
+    """
+    Pokazanie danych jednej sali ( /room/{id}).
+    @TODO DetailView?
+    """
 
     def get(self, request, pk):
         room = Room.objects.get(pk=pk)
