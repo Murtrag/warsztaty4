@@ -2,7 +2,8 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from page.models import Room, Reservation
 from django.views import View
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.views.generic import ListView, DetailView, edit
 from datetime import datetime
 
 
@@ -16,28 +17,11 @@ class DetailRoom(DetailView):
     template_name = "detail_room.html"
 
 
-def add_room(request):
-    """Dodawanie nowej sali ( /room/new)."""
-    if request.method == "GET":
-        return render(request, "add_room.html")
-    if request.method == "POST":
-        rooms = Room()
-        rooms.name = request.POST["name"]
-        rooms.capacity = request.POST["capacity"]
-        if request.POST["projector"] == "Tak":
-            rooms.projector = True
-        if request.POST["projector"] == "Nie":
-            rooms.projector = False
-        if request.POST["tv"] == "Tak":
-            rooms.tv = True
-        if request.POST["tv"] == "Nie":
-            rooms.tv = False
-        if request.POST["air_conditioning"] == "Tak":
-            rooms.air_conditioning = True
-        if request.POST["air_conditioning"] == "Nie":
-            rooms.air_conditioning = False
-        rooms.save()
-        return HttpResponse("Dodano pokój")
+class AddRoom(edit.CreateView):
+    model = Room
+    template_name = "add_room.html"
+    success_url = reverse_lazy("all_rooms")
+    fields = ("name", "capacity", "projector", "tv", "air_conditioning")
 
 
 def delete_room(request, id):

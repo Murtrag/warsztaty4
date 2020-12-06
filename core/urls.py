@@ -9,7 +9,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("", views.RoomList.as_view()),
     url("^all_rooms/", views.RoomList.as_view(), name="all_rooms"),
-    url(r"^room/new/$", views.add_room, name="room_new"),
+    url(r"^room/new/$", views.AddRoom.as_view(), name="room_new"),
     url(r"^room/delete/(?P<id>\d+)$", views.delete_room, name="room_delete"),
     url(r"^room/(?P<pk>\d+)", views.DetailRoom.as_view(), name="room_detail"),
     url(r"^room/modify/(?P<id>\d+)$", views.edit_room, name="room_modify"),
