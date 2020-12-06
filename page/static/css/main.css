@@ -1,9 +1,43 @@
 body {
-    background-color: silver;
+	background-color: silver;
+	color: white;
 }
+.container:not(.footer){
+	background-color: black;
+	min-height: 500px;
+	overflow: hidden;
+}
+img{
+	display: block;
+	float: left;
+	margin-left: -10px;
+}
+.header h1{
+	margin-bottom: 50px;
+	margin-top: 20px;
+	color: white;
+	font-family: "Lucida Console";
+
+}
+.header{
+	border: 1px solid #ccc !important;
+}
+form{
+	line-height: 40px;
+	margin-bottom: 5vh;
+}
+.footer{
+	text-align: center;
+	background-color: #141414;
+}
+
 .container{
-    backgroud-color: black;
+	backgroud-color: black;
 }
 .list_terms, .list_form{
 	list-style-type: none;
 }
+label{
+	min-width: 10vw;
+}
+

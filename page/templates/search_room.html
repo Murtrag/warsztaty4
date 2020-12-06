@@ -4,21 +4,22 @@
 {% block title %}formularz{% endblock %}
 {% block content %}
 <form action="/search" method="GET">
-Podaj minimalny rozmiar sali:
-    <label>
-        <input type="number" name="least_capacity">
-    </label><br>
-Dostępność rzutnika:
-<label>
-    <input type="checkbox" name="projector" value="check">
-</label><br>
-Data rezerwacji:
-<label>
-    <input type="date" name="date">
-</label><br>
-<label>
-    <input type="submit" value="Sprawdź">
-</label>
+	<ul class="list_form">
+		<li>
+			<label for="number">Podaj minimalny rozmiar sali:</label>
+			<input type="number" name="least_capacity">
+		</li>
+		<li>	
+			<label for="projector">Dostępność rzutnika:</label>
+			<input id="projector" type="checkbox" name="projector" value="check">
+		</li>
+		<li>
+			<label for="date">Data rezerwacji:</label>
+			<input id="date" type="date" name="date">
+		</li>
+	</ul>
+	<input type="submit" value="Sprawdź">
+
 
 </form>
 {% endblock %}
