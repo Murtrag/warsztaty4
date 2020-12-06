@@ -12,6 +12,11 @@ urlpatterns = [
     url(r"^room/new/$", views.AddRoom.as_view(), name="room_new"),
     url(r"^room/delete/(?P<pk>\d+)$", views.DeleteRoom.as_view(), name="room_delete"),
     url(r"^room/(?P<pk>\d+)", views.DetailRoom.as_view(), name="room_detail"),
+    url(
+        r"^room/reservation/delete/(?P<pk>\d+)$",
+        views.DeleteReservation.as_view(),
+        name="reservation_delete",
+    ),
     url(r"^room/modify/(?P<pk>\d+)$", views.EditRoom.as_view(), name="room_edit"),
     url(r"^search/", views.SearchView.as_view(), name="search"),
     url(

@@ -41,7 +41,9 @@ Nazwa: {{room.name}}<br>
 		<ul class="list_terms">
             {% for term in  room.reservation_set.all %}
 	    <li>
+		    <a href="{% url 'reservation_delete' pk=term.pk %}">
                <i class="fa fa-times" aria-hidden="true"></i>
+		    </a>
 	       {{term.date}} by {{term.client}}
 	    </li>
             {% endfor %}

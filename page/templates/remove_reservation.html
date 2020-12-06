@@ -1,0 +1,10 @@
+{% extends 'template.html' %}
+
+{% block content %}
+<form method="post">{% csrf_token %}
+	<p>Czy na pewno chcesz usunąć termin {{ object.date }} na klienta {{object.client}}?</p>
+	<input type="submit" value="Potwierdź">
+</form>
+
+{% endblock %}
+

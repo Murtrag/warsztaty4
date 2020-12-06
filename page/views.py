@@ -81,8 +81,6 @@ class ReservationView(View):
             ):
                 print(
                     "old date",
-                    date,
-                    datetime.today().replace(hour=0, minute=0, second=0, microsecond=0),
                 )
                 pass
                 # @TODO django message about old date
@@ -99,3 +97,11 @@ class ReservationView(View):
             pass
             # @TODO django message about no date
         return redirect("room_detail", pk=pk)
+
+
+class DeleteReservation(edit.DeleteView):
+    model = Reservation
+    template_name = "remove_reservation.html"
+
+    def get_success_url(self):
+        return reverse_lazy("room_detail", kwargs={"pk": self.object.rooms.pk})
