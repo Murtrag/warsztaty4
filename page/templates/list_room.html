@@ -1,6 +1,9 @@
 {% extends 'template.html' %}
 
 {% block content %}
+
+    {% include 'message.html' %}
+
     {% for room in object_list %}
         <a href="{% url 'room_detail' room.pk%}">{{room.name}}</a> &nbsp;
 	wolna dziś:

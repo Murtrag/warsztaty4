@@ -4,7 +4,9 @@ from page.models import Room, Reservation
 from django.views import View
 from django.urls import reverse_lazy
 from django.views.generic import ListView, DetailView, edit
+from django.contrib.messages.views import SuccessMessageMixin
 from datetime import datetime
+from django.contrib import messages
 
 
 class RoomList(ListView):
@@ -17,8 +19,9 @@ class DetailRoom(DetailView):
     template_name = "detail_room.html"
 
 
-class AddRoom(edit.CreateView):
+class AddRoom(SuccessMessageMixin, edit.CreateView):
     model = Room
+    success_message = "Pomyslnie dodano salkę"
     template_name = "add_room.html"
     success_url = reverse_lazy("all_rooms")
     fields = ("name", "capacity", "projector", "tv", "air_conditioning")
