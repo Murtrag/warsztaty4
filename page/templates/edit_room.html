@@ -3,21 +3,9 @@
 {% block content %}
 <form method="post">
    {% csrf_token %}
-   <label>Nazwa sali:
-        <input type="text" name="name" value={{rooms.name}}>
-    </label><br>
-    <label>Liczba osób, które sala może pomieścić:
-        <input type="text" name="capacity">
-    </label><br>
-    <label>Projektor (wpisz "tak" lub "nie"):
-        <input type="text" name="projector">
-    </label><br>
-    <label>Telewizor (wpisz "tak" lub "nie"):
-        <input type="text" name="tv">
-    </label><br>
-    <label>Klimatyzacja (wpisz "tak" lub "nie"):
-        <input type="text" name="air_conditioning">
-    </label><br>
-    <input type="submit" name="submit" value="Wyślij">
+   <ul class="list_form">
+   {{form.as_ul}}
+   </ul>
+    <input type="submit" name="submit" value="Edytuj">
 </form>
 {% endblock %}
