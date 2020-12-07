@@ -46,7 +46,7 @@ pip install psycopg2-binary
 {% endblock %}
 ```
 
-2. Librarys
+2. Libraries
 
   * awesomeicons 4.8
 
@@ -59,5 +59,8 @@ pip install psycopg2-binary
 
     - documentation: https://getbootstrap.com/docs/4.0/getting-started/introduction/
     
+  * dropzone 5.7.0
 
+    - documentation: https://www.dropzonejs.com/
+    
 
