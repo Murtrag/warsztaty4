@@ -46,7 +46,7 @@ pip install psycopg2-binary
 {% endblock %}
 ```
 
-2. Librarys
+2. Libraries
 
   * awesomeicons 4.8
 
