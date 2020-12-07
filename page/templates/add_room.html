@@ -8,11 +8,13 @@
 {% endblock %}
 {% block content %}
 <form method="post">
-   {% csrf_token %}
-   <ul class="list_form">
-   {{form.as_ul}}
-   </ul>
-   <input type="submit" name="submit" value="Save">
+	{% csrf_token %}
+	<ul class="list_form">
+		{% for i in form%}
+		<li><label for="id_{{i.name}}">{% cycle 'Nazwa' 'Ilość pomieszczeń' 'Projektor' 'TV' 'Klimatyzacja'%}:</label> {{i}}</li>
+		{%endfor%}
+	</ul>
+	<input type="submit" name="submit" value="Dodaj">
 </form>
 {% if created_room_id %}
 	<form action="{% url 'room_image_upload' pk=created_room_id%}" class="dropzone" id="my-awesome-dropzone">
