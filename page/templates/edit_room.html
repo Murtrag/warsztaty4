@@ -13,9 +13,9 @@
    </ul>
     <input type="submit" name="submit" value="Edytuj">
 </form>
-<!-- <form action="{$ url 'room_image_upload' pk=32$}" class="dropzone" id="my-awesome-dropzone"> -->
-<!-- 	{% csrf_token %} -->
-<!-- </form> -->
+<form action="{% url 'room_image_upload' pk=form.instance.id%}" class="dropzone" id="my-awesome-dropzone">
+	{% csrf_token %}
+</form>
 
 {% endblock %}
 {% block scripts %}
