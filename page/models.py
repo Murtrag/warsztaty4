@@ -6,7 +6,9 @@ from datetime import datetime
 class Room(models.Model):
     name = models.CharField(max_length=64)
     capacity = models.IntegerField()
-    projector = models.BooleanField(default=False)
+    projector = models.BooleanField(
+        default=False,
+    )
     tv = models.BooleanField(default=False)
     air_conditioning = models.BooleanField(default=False)
     images = models.ManyToManyField("Image")

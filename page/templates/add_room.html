@@ -1,5 +1,11 @@
 {% extends 'template.html' %}
+{% load static %}
 
+
+{% block headers %}
+<!-- <link rel="stylesheet" href="{% static 'dropzone/dist/basic.css' %}"> -->
+<link rel="stylesheet" href="{% static 'dropzone/dist/dropzone.css' %}">
+{% endblock %}
 {% block content %}
 <form method="post">
    {% csrf_token %}
@@ -8,4 +14,18 @@
    </ul>
    <input type="submit" name="submit" value="Save">
 </form>
+{% if created_room_id %}
+	<form action="{% url 'room_image_upload' pk=created_room_id%}" class="dropzone" id="my-awesome-dropzone">
+		{% csrf_token %}
+	</form>
+{% endif %}
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dropzone/dist/dropzone.js'%}"></script>
+<!-- <script> -->
+<!-- 	$(()=>{ -->
+<!-- 		$(".dz-hidden-input").prop("disabled",true); -->
+<!-- 	}) -->
+<!-- </script> -->
 {% endblock %}

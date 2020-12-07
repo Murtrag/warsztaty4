@@ -1,5 +1,10 @@
 {% extends 'template.html' %}
+{% load static %}
 
+{% block headers %}
+<link rel="stylesheet" href="{% static 'dropzone/dist/basic.css' %}">
+<link rel="stylesheet" href="{% static 'dropzone/dist/dropzone.css' %}">
+{% endblock %}
 {% block content %}
 <form method="post">
    {% csrf_token %}
@@ -8,4 +13,11 @@
    </ul>
     <input type="submit" name="submit" value="Edytuj">
 </form>
+<!-- <form action="{$ url 'room_image_upload' pk=32$}" class="dropzone" id="my-awesome-dropzone"> -->
+<!-- 	{% csrf_token %} -->
+<!-- </form> -->
+
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'dropzone/dist/dropzone.js'%}"></script>
 {% endblock %}

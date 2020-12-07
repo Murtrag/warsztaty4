@@ -1,13 +1,14 @@
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
-from page.models import Room, Reservation
-from django.views import View
-from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, edit
-from django.contrib.messages.views import SuccessMessageMixin
+import os
 from datetime import datetime
 from django.contrib import messages
+from django.contrib.messages.views import SuccessMessageMixin
 from django.core.paginator import Paginator
+from django.http import HttpResponse, HttpResponseBadRequest
+from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse, reverse_lazy
+from django.views import View
+from django.views.generic import ListView, DetailView, edit
+from page.models import Room, Reservation, Image
 
 
 class RoomList(ListView):
@@ -23,10 +24,39 @@ class DetailRoom(DetailView):
 
 class AddRoom(SuccessMessageMixin, edit.CreateView):
     model = Room
-    success_message = "Pomyslnie dodano salkę"
+    success_message = "Pomyslnie dodano salkę, proszę skorzystać z pola pod formularzem aby dołączyć zdjęcia"
     template_name = "add_room.html"
-    success_url = reverse_lazy("all_rooms")
     fields = ("name", "capacity", "projector", "tv", "air_conditioning")
+
+    def get_success_url(self, **kwargs):
+        self.request.session["created_room_id"] = self.object.id
+        return reverse("room_new")
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        try:
+            context["created_room_id"] = self.request.session.pop("created_room_id")
+        except Exception:
+            # created_room_id doas not exist in session, means not any new element were created so skip
+            pass
+        return context
+
+
+class UploadImage(View):
+    def post(self, request, pk):
+        try:
+            image_obj = request.FILES["file"]
+            assert os.path.splitext(image_obj._name)[1][1:] in [
+                "gif",
+                "jpg",
+            ], "Not an image extension!"
+            new_image = Image()
+            new_image.image.save(image_obj.name, image_obj)
+            new_image.save()
+            Room.objects.get(pk=pk).images.add(new_image)
+        except Exception as e:
+            return HttpResponseBadRequest(f"No Files Attached. {e}")
+        return HttpResponse("File Attached.")
 
 
 class DeleteRoom(edit.DeleteView):
