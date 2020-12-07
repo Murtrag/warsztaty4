@@ -90,20 +90,34 @@ class SearchView(View):
 
         else:
             least_capacity = request.GET.get("least_capacity", False) or False
-            projector = request.GET.get("projector", False)
-            date = request.GET.get("date", False) or False
-            filters = {"projector": False}
-            if least_capacity is not False:
+            projector = request.GET.get("projector", None)
+            tv = request.GET.get("tv", None)
+            air_conditioning = request.GET.get("air_conditioning", None)
+            date = request.GET.get("date", None) or None
+            filters = {}
+            # filters = {"projector": False, "tv":False, "air_conditioning":False}
+            if least_capacity is not None:
                 filters.update({"capacity__gte": int(least_capacity)})
 
-            if projector is not False:
+            if projector is not None:
                 filters.update({"projector": True})
-
-            if date is not False:
-                filters.update({"date": datetime.strptime(date, "%Y-%m-%d")})
+            if tv is not None:
+                filters.update({"tv": True})
+            if air_conditioning is not None:
+                filters.update({"air_conditioning": True})
 
             page_number = request.GET.get("page")
-            paginator = Paginator(Room.objects.filter(**filters), self.paginate_by)
+
+            if date is not None:
+                paginator = Paginator(
+                    Room.objects.filter(**filters).exclude(
+                        reservation__date=datetime.strptime(date, "%Y-%m-%d")
+                    ),
+                    self.paginate_by,
+                )
+            else:
+                paginator = Paginator(Room.objects.filter(**filters), self.paginate_by)
+
             page_obj = paginator.get_page(page_number)
 
             return render(
