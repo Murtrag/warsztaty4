@@ -7,6 +7,7 @@ $ docker run --name postgres-docker -e POSTGRES_PASSWORD=postgres -p 5432:5432 -
 ```
 2. Create `local_settings.py` in core app and fill it up with configuration e.g.
 ```
+SECRET_KEY = "yoursecretkey:)"
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
