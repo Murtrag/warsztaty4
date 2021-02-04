@@ -1,0 +1,9 @@
+.flake8
+.toml
+docker-compose.yaml
+Dockerfile
+env/
+.gitignore
+.git
+.pre-commit-config.yaml
+readme.md
