@@ -1,11 +1,7 @@
 # Room Booker
 
 ## Install
-1. Run docker container with Postgres
-```
-$ docker run --name postgres-docker -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres
-```
-2. Create `local_settings.py` in core app and fill it up with configuration e.g.
+1. Create `local_settings.py` in core app and fill it up with configuration e.g.
 ```
 SECRET_KEY = "yoursecretkey:)"
 DATABASES = {
@@ -14,24 +10,22 @@ DATABASES = {
             'NAME': 'postgres',
             'USER': 'postgres',
             'PASSWORD': 'postgres',
-            'HOST': 'localhost',
+            'HOST': 'db',
             'PORT': '5432',
             }
         }
 
 ```
-3. Install requirements:
+
+2. Run containers
 ```
-pip3 install -r requirements.txt
-```
-if psycopg cause problems then try:
-```
-pip install psycopg2-binary
+$ sudo docker-compose -f docker-compose.yaml up
 ```
 
 4. Migrate database
 ```
-./manage.py migrate
+$ sudo docker exec -it room-booker_app bash
+# ./manage.py migrate
 ```
 
 ## Development Tips
