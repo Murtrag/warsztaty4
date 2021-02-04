@@ -120,6 +120,7 @@ class SearchView(View):
 
             page_obj = paginator.get_page(page_number)
 
+            print(filters)
             return render(
                 request,
                 "list_available_rooms.html",

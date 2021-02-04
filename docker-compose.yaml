@@ -1,4 +1,5 @@
 version: "3"
+
 services:
   db:
     image: postgres
@@ -13,6 +14,9 @@ services:
     build: .
     ports:
       - "8000:8000"
+    volumes:
+      - .:/code:Z
+    tty: true
     depends_on:
       - db
 volumes:
