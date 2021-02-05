@@ -85,3 +85,7 @@ label{
 .div__detail .carousel.slide{
 	margin: 2rem 0 3rem 0;
 }
+.dz-image img{
+	width:120px;
+	height:120px;
+}

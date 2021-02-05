@@ -17,6 +17,7 @@ services:
     volumes:
       - .:/code:Z
     tty: true
+    stdin_open: true
     depends_on:
       - db
 volumes:

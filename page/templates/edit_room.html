@@ -21,9 +21,11 @@
 Dodaj obrazki
 <form action="{% url 'room_image_upload' pk=form.instance.id%}" class="dropzone" id="my-awesome-dropzone">
 	{% csrf_token %}
+	<input type="hidden" id="initialImages" value="{{dropzone_fields}}" />
 </form>
-
 {% endblock %}
+
 {% block scripts %}
 <script src="{% static 'dropzone/dist/dropzone.js'%}"></script>
+<script src="{% static 'dropzone/configuration.js'%}"></script>
 {% endblock %}

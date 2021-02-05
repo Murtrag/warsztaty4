@@ -1,4 +1,5 @@
 import os
+import json
 from datetime import datetime
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
@@ -58,6 +59,15 @@ class UploadImage(View):
             return HttpResponseBadRequest(f"No Files Attached. {e}")
         return HttpResponse("File Attached.")
 
+class DeleteFile(View):
+    def post(self, request):
+        post = json.loads(request.body)
+        print(post.get('file_name'))
+        Image.objects.filter(image=f"galery/{post.get('file_name')}").delete()
+        return HttpResponse("File Deleted.")
+
+        
+
 
 class DeleteRoom(edit.DeleteView):
     model = Room
@@ -80,6 +90,15 @@ class EditRoom(SuccessMessageMixin, edit.UpdateView):
     def get_success_url(self):
         return reverse_lazy("room_edit", kwargs={"pk": self.kwargs["pk"]})
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # for field in Room.objects.get(pk=self.kwargs["pk"]).images.all():
+        #     breakpoint()
+        context['dropzone_fields'] = [
+            [field.pk,field.image.name.lstrip('galery/'), field.image.url, 0 or field.image.size] for field in Room.objects.get(pk=self.kwargs["pk"]).images.all()
+        ]
+        return context
+
 
 class SearchView(View):
     paginate_by = 6
@@ -95,7 +114,6 @@ class SearchView(View):
             air_conditioning = request.GET.get("air_conditioning", None)
             date = request.GET.get("date", None) or None
             filters = {}
-            # filters = {"projector": False, "tv":False, "air_conditioning":False}
             if least_capacity is not None:
                 filters.update({"capacity__gte": int(least_capacity)})
 
@@ -120,7 +138,6 @@ class SearchView(View):
 
             page_obj = paginator.get_page(page_number)
 
-            print(filters)
             return render(
                 request,
                 "list_available_rooms.html",
