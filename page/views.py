@@ -59,14 +59,13 @@ class UploadImage(View):
             return HttpResponseBadRequest(f"No Files Attached. {e}")
         return HttpResponse("File Attached.")
 
+
 class DeleteFile(View):
     def post(self, request):
         post = json.loads(request.body)
-        print(post.get('file_name'))
+        print(post.get("file_name"))
         Image.objects.filter(image=f"galery/{post.get('file_name')}").delete()
         return HttpResponse("File Deleted.")
-
-        
 
 
 class DeleteRoom(edit.DeleteView):
@@ -94,8 +93,14 @@ class EditRoom(SuccessMessageMixin, edit.UpdateView):
         context = super().get_context_data(**kwargs)
         # for field in Room.objects.get(pk=self.kwargs["pk"]).images.all():
         #     breakpoint()
-        context['dropzone_fields'] = [
-            [field.pk,field.image.name.lstrip('galery/'), field.image.url, 0 or field.image.size] for field in Room.objects.get(pk=self.kwargs["pk"]).images.all()
+        context["dropzone_fields"] = [
+            [
+                field.pk,
+                field.image.name.lstrip("galery/"),
+                field.image.url,
+                0 or field.image.size,
+            ]
+            for field in Room.objects.get(pk=self.kwargs["pk"]).images.all()
         ]
         return context
 
