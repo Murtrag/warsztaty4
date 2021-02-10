@@ -5,8 +5,10 @@ from mixer.backend.django import mixer
 
 
 def test_is_booked():
-    room = mixer.blend("page.Reservation", date=datetime.datetime.today()).rooms
-    assert room.is_booked is True
+    room_booked = mixer.blend("page.Reservation", date=datetime.datetime.today()).rooms
+    room_unbooked = mixer.blend("page.Room")
+    assert room_booked.is_booked is True
+    assert room_unbooked.is_booked is False
 
 
 def test_room_str():
