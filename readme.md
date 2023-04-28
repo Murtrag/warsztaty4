@@ -1,5 +1,8 @@
 # Room Booker
 
+Room Booker is a web application built with Django, HTML, CSS, and JavaScript, utilizing Docker and Docker-compose for easy deployment and management of the application's environment. The application's main focus is to provide an intuitive and user-friendly interface for managing and reserving rooms in a facility.
+
+
 ## Install
 1. Create `local_settings.py` in core app and fill it up with configuration e.g.
 ```
