@@ -28,7 +28,7 @@ $ sudo docker-compose -f docker-compose.yaml up
 4. Migrate database
 ```
 $ sudo docker exec -it room-booker_app bash
-# ./manage.py migrate
+# python3 manage.py migrate
 ```
 
 ## Development Tips
